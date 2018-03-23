@@ -38,7 +38,6 @@ def read_file(fileName, rmnl=False):
 if __name__ == "__main__":
     ser = open_serial()
     commandsList = read_file(fileName="turn_on_24G_CUT_COMMANDS.txt", rmnl=True)
-    #commandsList = read_file(fileName="turn_off_24G_CUT_COMMANDS.txt", rmnl=True)
     #print(commandsList)
     #sys.exit()
     for command in commandsList:

@@ -41,7 +41,7 @@ def make_dir(dirName="REPLACED"):
             os.makedirs(path)
         except OSError as exc:
             print("error while making new dir...")
-            sys.exit()            
+            sys.exit()
     return path
 
 def write_file(fileName, content, endline="\n", overWrite=False, response=True, rmSign=[]):
@@ -113,14 +113,4 @@ if __name__ == "__main__":
                                content=file,
                                response=True,
                                overWrite=False,
-                               endline="\n")                    
-
-
-
-
-
-
-
-
-
-            
+                               endline="\n")
