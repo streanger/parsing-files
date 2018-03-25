@@ -31,10 +31,13 @@ if __name__ == "__main__":
     #print(currentFiles)
 
     scriptPath = script_path()
-    for files in os.walk(scriptPath):
-        head, tail = os.path.split(files[0])
-        print(head, tail)
+    #for files in os.walk(scriptPath):
+    #    head, tail = os.path.split(files[0])
+    #    print(head, tail)
         #print(files)
+
+    for path, dirs, files in os.walk(scriptPath):
+        print(path, dirs, files)
 
 #todo
 #search over dirs and subdirs
