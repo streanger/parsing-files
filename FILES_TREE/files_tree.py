@@ -16,13 +16,27 @@ def get_files(rmScriptName=True):
         files.remove(scriptName)
     return files
 
+def is_dir(file=""):
+    return os.path.isdir(file)  #isfile
 
+def make_tree(files):
+    print(42)
+    #subDir = os.path.join(path, sub)
+    #os.chdir(subDir)
+    #fileName, extension = os.path.splitext(file)
 
 
 if __name__ == "__main__":
-    print(42)
+    #currentFiles = get_files()
+    #print(currentFiles)
 
+    scriptPath = script_path()
+    for files in os.walk(scriptPath):
+        head, tail = os.path.split(files[0])
+        print(head, tail)
+        #print(files)
 
 #todo
 #search over dirs and subdirs
 #create dirs tree with files inside
+#mark files on green and folders on blue
