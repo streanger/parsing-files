@@ -1,0 +1,4 @@
+"example of text to find"
+"this multi line
+ text"
+"last thing"

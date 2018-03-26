@@ -3,6 +3,7 @@
 #todo -> add posibility to change "parse-signs"
 import os
 import sys
+import itertools
 
 def script_path():
     path = os.path.realpath(os.path.dirname(sys.argv[0]))
@@ -59,7 +60,7 @@ def write_file(fileName, content, endline="\n", overWrite=False, response=True, 
             file.writelines(str(item)+endline)
         file.close()
         if response:
-            print("\n--< written to: {0} | contentType: {1}".format(fileName, contentType))
+            print("--< written to: {0} | contentType: {1}".format(fileName, contentType))
     return True
 
 def make_dir(dirName="REPLACED"):
@@ -70,17 +71,19 @@ def make_dir(dirName="REPLACED"):
             os.makedirs(path)
         except OSError as exc:
             print("error while making new dir...")
-            sys.exit()            
+            sys.exit()
     return path
 
-def main():
+def main(args):
     filesTxt = [item for item in os.listdir() if item[-4:]==".txt"]
     for fileIn in filesTxt:
         try:
             content = read_file(fileIn)
         except:
             print("wrong name or file not exists: {0}".format(fileIn))
-            continue  
+            continue
+        for x in range(3, 150):
+            content = [item.replace(' '*x, '') for item in content]   #remove multi-spaces
         stringContent = "".join(content)
         indexes = all_indexes('"', stringContent)
         if not (len(indexes)%2 == 0):
@@ -94,23 +97,21 @@ def main():
         commands = [stringContent[item[0]:item[1]+1] for item in grouped]
         commands = [item.replace("\n","") for item in commands] #remove newline in command
         commands = [item.replace('"', '') for item in commands]
-        for x in range(3, 150):
-            commands = [item.replace(' '*x, '') for item in commands]   #remove multi spaces
-        #for command in commands:
-        #    print(command)
-
-        fileOut = fileIn.split(".")[0]+"_COMMANDS.txt"
-        write_file(fileName=fileOut,
-                   content=commands,
-                   response=True,
-                   rmSign=[" "*98],
-                   overWrite=True,
-                   endline="\n")   
-        
+        if "-p" in args:
+            for command in commands:
+                print(command)
+        elif "-w" in args:
+            fileOut = fileIn.split(".")[0]+"_COMMANDS.txt"
+            write_file(fileName=fileOut,
+                       content=commands,
+                       response=True,
+                       rmSign=[" "*98],
+                       overWrite=True,
+                       endline="\n")
+        else:
+            print(commands)
 
 if __name__ == "__main__":
-    main()
-
-
+    main(sys.argv[1:])
 
 
