@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 #to read metadata from images
 from PIL import Image
+from PIL.ExifTags import TAGS
+
 from termcolor import colored
 import sys
 import os
@@ -14,6 +16,9 @@ def read_meta(filename):
     #from png files
     image = Image.open(filename)
     info = image.info
+    #for tag, value in info.items():
+    #    key = TAGS.get(tag, tag)
+    #    print(key + "" + str(value))
     return info
 
 #from jpeg, etc files
@@ -25,11 +30,10 @@ def main():
     else:
         path = script_path()
         files = [item for  item in os.listdir(path) if item[-4:] == ".png"]
-    #print(files)
-    #sys.exit()
     for item in files:
         metadata = read_meta(item)
         print("{0}: {1}".format(colored(item, "cyan"), metadata))
+
 
 if __name__ == "__main__":
     main()
