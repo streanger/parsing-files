@@ -25,7 +25,7 @@ def justify(content, grid):
     horSign = '|'
     vertSign = ' ' # '_'
     lineLen = [max([len(part) for part in item]) for item in transposed]
-    content = ["|".join([part.ljust(lineLen[key]+5, vertSign) if not key else part.center(lineLen[key]+5, vertSign) for key, part in enumerate(item)]) for item in content]
+    content = [horSign.join([part.ljust(lineLen[key]+5, vertSign) if not key else part.center(lineLen[key]+5, vertSign) for key, part in enumerate(item)]) for item in content]
     line = "\n" + "-"*len(content[0]) + "\n"
     if grid:
         out = line.join(content)
