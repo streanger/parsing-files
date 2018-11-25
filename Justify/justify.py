@@ -16,7 +16,7 @@ def simple_read(file_name):
 def justify(content, grid):
     ''' convert text to justified '''
     content = [item.strip().split(';') for item in content if item.strip()]
-    maxRow = max([len(max(item, key=len)) for item in content])
+    # maxRow = max([len(max(item, key=len)) for item in content])
     maxRow = len(max(content, key=len))
     content = [item + [""]*(maxRow-len(item)) for item in content]
     transposed = list(map(list, zip(*content)))
